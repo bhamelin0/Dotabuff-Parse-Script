@@ -1,0 +1,70 @@
+
+
+
+
+44397
+20860
+23537
+
+
+
+
+
+summary(Dota$Duration)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    209    2121    2439    2467    2781    5813 
+
+
+   Dire Victory Radiant Victory 
+          20858           23538 44396 total  53% radiant winrate
+
+
+44937 datas
+
+
+cor(Dota$SUM1Gold, Dota$SUM1XPM, use="all.obs")
+[1] 0.7062575
+
+
+
+
+> DotaLategame <- dplyr::filter(Dota, Duration > 2450)
+> summary(DotaLategame$Winner)
+   Dire Victory Radiant Victory 
+          10213            9818 
+> DotaLategame <- dplyr::filter(Dota, Duration < 2450)
+> summary(DotaLategame$Winner)
+   Dire Victory Radiant Victory 
+          10635           13708 
+
+PositiveReds <- filter(DotaAbsolutes, NormalizedSum>0, Winner=="Dire Victory")
+NegativeReds <- filter(DotaAbsolutes, NormalizedSum<0, Winner=="Dire Victory")
+PositiveBlues <- filter(DotaAbsolutes, NormalizedSum>0, Winner=="Radiant Victory")
+NegativeBlues <- filter(DotaAbsolutes, NormalizedSum<0, Winner=="Radiant Victory")
+
+
+
+
+PositiveReds <- filter(DotaAbsolutes, NormalizedSum>-0.152921, Winner=="Dire Victory")
+NegativeReds <- filter(DotaAbsolutes, NormalizedSum< -0.152921, Winner=="Dire Victory")
+NegativeBlues <- filter(DotaAbsolutes, NormalizedSum< -0.15921, Winner=="Radiant Victory")
+PositiveBlues <- filter(DotaAbsolutes, NormalizedSum> -0.15921, Winner=="Radiant Victory")
+
+
+
+> iris.training <- DotaAbsMachine[ind==1, 4:5, drop = FALSE]
+> iris.test <- DotaAbsMachine[ind==2, 3:5, drop = FALSE]
+> iris.training <- DotaAbsMachine[ind==1, 3:5, drop = FALSE]
+> iris.test <- DotaAbsMachine[ind==2, 3:5, drop = FALSE]
+> iris.training <- DotaAbsMachine[ind==1, 3:5, drop = FALSE]
+> iris.test$AbsKills = NULL
+> iris.training <- DotaAbsMachine[ind==1, 3:5, drop = FALSE]
+> iris.training$AbsKills = NULL
+> iris_pred <- knn(train = iris.training, test = iris.test, cl = iris.trainLabels, k=3)
+> CrossTable(x = iris.testLabels, y = iris_pred, prop.chisq=FALSE)
+
+59.2% Correct total
+64.5% Correct Radiant
+53% Correct Dire
+
+
